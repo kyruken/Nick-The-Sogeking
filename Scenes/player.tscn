@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dcqlvm0iqkgqi"]
+
+[ext_resource type="Texture2D" uid="uid://cd1ar5obp6y8o" path="res://Sprites/COFFE.png" id="1_hlayo"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_hwssg"]
+[ext_resource type="PackedScene" uid="uid://dadxqahji7jr1" path="res://Scenes/bullet.tscn" id="2_lwnhh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_806x8"]
+size = Vector2(8, 14.4)
+
+[node name="Player" type="Node2D"]
+scale = Vector2(5, 5)
+script = ExtResource("1_hwssg")
+Bullet = ExtResource("2_lwnhh")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(127.2, 71.2)
+shape = SubResource("RectangleShape2D_806x8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(127.6, 70.4)
+texture = ExtResource("1_hlayo")
+
+[node name="Firepoint" type="Node2D" parent="."]
+position = Vector2(136, 72)
