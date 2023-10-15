@@ -17,3 +17,8 @@ func _physics_process(delta):
 
 func set_direction(direction: Vector2):
 	self.direction = direction
+
+
+func _on_area_2d_body_entered(body):
+	if body.has_method("handle_hit"):
+		body.handle_hit()

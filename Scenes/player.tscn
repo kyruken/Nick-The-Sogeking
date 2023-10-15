@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_806x8"]
 size = Vector2(8, 14.4)
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="Node2D" groups=["player"]]
 scale = Vector2(5, 5)
 script = ExtResource("1_hwssg")
 Bullet = ExtResource("2_lwnhh")

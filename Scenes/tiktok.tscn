@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqc66vafhwxjs"]
+
+[ext_resource type="Script" path="res://Scripts/Tiktok.gd" id="1_tklgr"]
+[ext_resource type="Texture2D" uid="uid://1vj7v3kc4raj" path="res://Sprites/customer.png" id="2_ow00m"]
+[ext_resource type="Script" path="res://Scripts/enemyhealth.gd" id="3_s2bjw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r7lha"]
+size = Vector2(9, 15)
+
+[node name="Tiktok" type="Node2D"]
+scale = Vector2(5, 5)
+script = ExtResource("1_tklgr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ow00m")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(9.53674e-08, 9.53674e-08)
+scale = Vector2(1, 1)
+script = ExtResource("3_s2bjw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0.5, 0.5)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_r7lha")
