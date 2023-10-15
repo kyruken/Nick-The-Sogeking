@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://7fm7pihgpwvk"]
+
+[ext_resource type="Texture2D" uid="uid://1vj7v3kc4raj" path="res://Sprites/customer.png" id="1_hupo8"]
+[ext_resource type="Script" path="res://Scripts/enemy1.gd" id="1_wjki6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6hc0g"]
+size = Vector2(11, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_onn6u"]
+radius = 62.9682
+
+[node name="enemy1" type="CharacterBody2D"]
+scale = Vector2(5, 5)
+script = ExtResource("1_wjki6")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_6hc0g")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.941, 1)
+texture = ExtResource("1_hupo8")
+
+[node name="detection_area" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
+shape = SubResource("CircleShape2D_onn6u")
+
+[connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
