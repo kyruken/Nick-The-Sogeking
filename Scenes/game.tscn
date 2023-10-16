@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2bw5jdsjuvj5"]
+[gd_scene load_steps=7 format=3 uid="uid://b2bw5jdsjuvj5"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_pmbes"]
 [ext_resource type="Texture2D" uid="uid://ckobfklah5rkq" path="res://Sprites/Grass.png" id="1_uejp1"]
 [ext_resource type="PackedScene" uid="uid://dcqlvm0iqkgqi" path="res://Scenes/player.tscn" id="2_y65w6"]
 [ext_resource type="Script" path="res://Scripts/BulletManager.gd" id="4_ciojm"]
 [ext_resource type="PackedScene" uid="uid://dqc66vafhwxjs" path="res://Scenes/tiktok.tscn" id="5_f5i5t"]
+[ext_resource type="PackedScene" uid="uid://7fm7pihgpwvk" path="res://Scenes/enemy1.tscn" id="6_m8xix"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_pmbes")
@@ -17,13 +18,14 @@ offset_bottom = 720.0
 texture = ExtResource("1_uejp1")
 stretch_mode = 1
 
-[node name="Player" parent="." instance=ExtResource("2_y65w6")]
-position = Vector2(-31, -22)
-
 [node name="BulletManager" type="Node2D" parent="."]
 script = ExtResource("4_ciojm")
 
 [node name="Tiktok" parent="." instance=ExtResource("5_f5i5t")]
-position = Vector2(979, 194)
+position = Vector2(1055, 208)
 
-[connection signal="player_fired_bullet" from="Player" to="BulletManager" method="_on_player_player_fired_bullet"]
+[node name="Player" parent="." instance=ExtResource("2_y65w6")]
+position = Vector2(673, 460)
+
+[node name="enemy1" parent="." instance=ExtResource("6_m8xix")]
+position = Vector2(291, 472)
