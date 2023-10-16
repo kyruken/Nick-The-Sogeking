@@ -16,6 +16,7 @@ offset_right = 1293.0
 offset_bottom = 720.0
 texture = ExtResource("1_uejp1")
 stretch_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Player" parent="." instance=ExtResource("2_y65w6")]
 position = Vector2(-31, -22)
