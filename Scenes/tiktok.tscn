@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://dqc66vafhwxjs"]
+[gd_scene load_steps=6 format=3 uid="uid://dqc66vafhwxjs"]
 
 [ext_resource type="Script" path="res://Scripts/Tiktok.gd" id="1_tklgr"]
 [ext_resource type="Texture2D" uid="uid://1vj7v3kc4raj" path="res://Sprites/customer.png" id="2_ow00m"]
 [ext_resource type="Script" path="res://Scripts/enemyhealth.gd" id="3_s2bjw"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1mu66"]
+size = Vector2(7.6, 12)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r7lha"]
-size = Vector2(9, 15)
+size = Vector2(10.6, 13.4)
 
 [node name="Tiktok" type="Node2D"]
 scale = Vector2(5, 5)
@@ -15,9 +18,21 @@ script = ExtResource("1_tklgr")
 texture = ExtResource("2_ow00m")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(9.53674e-08, 9.53674e-08)
+position = Vector2(9.53674e-08, 8.9407e-08)
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("3_s2bjw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(0.5, 0.5)
+position = Vector2(0.6, 0.2)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_1mu66")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.400003, 0.4)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_r7lha")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
