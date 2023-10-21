@@ -1,15 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://b2bw5jdsjuvj5"]
+[gd_scene load_steps=12 format=3 uid="uid://cdn634wsbxht1"]
 
-[ext_resource type="Script" path="res://Scripts/game.gd" id="1_pmbes"]
-[ext_resource type="Texture2D" uid="uid://ckobfklah5rkq" path="res://Sprites/Grass.png" id="1_uejp1"]
-[ext_resource type="PackedScene" uid="uid://dcqlvm0iqkgqi" path="res://Scenes/player.tscn" id="2_y65w6"]
-[ext_resource type="Script" path="res://Scripts/BulletManager.gd" id="4_ciojm"]
-[ext_resource type="PackedScene" uid="uid://dqc66vafhwxjs" path="res://Scenes/tiktok.tscn" id="5_f5i5t"]
-[ext_resource type="PackedScene" uid="uid://7fm7pihgpwvk" path="res://Scenes/enemy1.tscn" id="6_m8xix"]
-[ext_resource type="Texture2D" uid="uid://qr3rtjgfljqu" path="res://Sprites/tilesheet_complete.png" id="7_3btqi"]
+[ext_resource type="Script" path="res://Scripts/game.gd" id="1_sawyx"]
+[ext_resource type="Texture2D" uid="uid://ckobfklah5rkq" path="res://Sprites/Grass.png" id="2_34wvc"]
+[ext_resource type="Script" path="res://Scripts/BulletManager.gd" id="3_hh2da"]
+[ext_resource type="PackedScene" uid="uid://dqc66vafhwxjs" path="res://Scenes/tiktok.tscn" id="4_bw031"]
+[ext_resource type="PackedScene" uid="uid://dcqlvm0iqkgqi" path="res://Scenes/player.tscn" id="5_mw2pq"]
+[ext_resource type="PackedScene" uid="uid://7fm7pihgpwvk" path="res://Scenes/enemy1.tscn" id="6_07iaa"]
+[ext_resource type="Texture2D" uid="uid://qr3rtjgfljqu" path="res://Sprites/tilesheet_complete.png" id="7_pan0n"]
+[ext_resource type="PackedScene" uid="uid://dmmsf1mya4tf4" path="res://Scenes/finishline.tscn" id="8_pwohq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g7e4d"]
-texture = ExtResource("7_3btqi")
+texture = ExtResource("7_pan0n")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -814,7 +815,7 @@ sources/0 = SubResource("TileSetAtlasSource_g7e4d")
 sources/1 = SubResource("TileSetScenesCollectionSource_do6np")
 
 [node name="Game" type="Node2D"]
-script = ExtResource("1_pmbes")
+script = ExtResource("1_sawyx")
 
 [node name="Ground" type="TextureRect" parent="."]
 visible = false
@@ -822,25 +823,28 @@ offset_left = -30.0
 offset_top = -22.0
 offset_right = 1293.0
 offset_bottom = 720.0
-texture = ExtResource("1_uejp1")
+texture = ExtResource("2_34wvc")
 stretch_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="BulletManager" type="Node2D" parent="."]
-script = ExtResource("4_ciojm")
+script = ExtResource("3_hh2da")
 
-[node name="Tiktok" parent="." instance=ExtResource("5_f5i5t")]
+[node name="Tiktok" parent="." instance=ExtResource("4_bw031")]
 position = Vector2(1055, 208)
 
-[node name="Player" parent="." instance=ExtResource("2_y65w6")]
+[node name="Player" parent="." instance=ExtResource("5_mw2pq")]
 position = Vector2(635, 438)
 
-[node name="enemy1" parent="." instance=ExtResource("6_m8xix")]
+[node name="enemy1" parent="." instance=ExtResource("6_07iaa")]
 position = Vector2(250, 136)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_xdqtd")
 format = 2
 layer_0/tile_data = PackedInt32Array(524300, 65536, 3, 589836, 65536, 3, 589837, 65536, 3, 458764, 65536, 3, 524301, 65536, 3, 458765, 65536, 3, 393229, 65536, 3, 393228, 65536, 3, 327692, 65536, 3, 327691, 65536, 3, 524296, 65536, 0, 524295, 65536, 0, 589831, 65536, 0, 589832, 65536, 0, 655368, 65536, 0, 655369, 65536, 0, 589833, 65536, 0, 524297, 65536, 0, 655367, 65536, 0, 327690, 262144, 3, 327689, 262144, 3, 327688, 262144, 3, 393224, 262144, 3, 458760, 262144, 3, 458761, 262144, 3, 393225, 262144, 3)
+
+[node name="Node2D" parent="." instance=ExtResource("8_pwohq")]
+position = Vector2(750, -366)
 
 [connection signal="player_fired_bullet" from="Player" to="BulletManager" method="_on_player_player_fired_bullet"]
