@@ -1,4 +1,4 @@
-extends Node2D
+extends CharacterBody2D
 
 signal player_fired_bullet(bullet, position, direction)
 @export var Bullet: PackedScene
@@ -10,14 +10,17 @@ signal player_fired_bullet(bullet, position, direction)
 func _ready():
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	position += Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") * speed * delta
+func get_input():
+	var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	velocity = input_direction * speed
+	
+func _physics_process(delta):
+	get_input()
+	move_and_slide()
 
 func _unhandled_input(event: InputEvent):
-		if event.is_action_released("shoot"):
-			shoot()
+	if event.is_action_released("shoot"):
+		shoot()
 			
 func shoot():
 	var bullet_instance = Bullet.instantiate()
