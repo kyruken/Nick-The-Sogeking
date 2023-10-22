@@ -1,22 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://dcqlvm0iqkgqi"]
+[gd_scene load_steps=6 format=3 uid="uid://dcqlvm0iqkgqi"]
 
 [ext_resource type="Texture2D" uid="uid://cd1ar5obp6y8o" path="res://Sprites/COFFE.png" id="1_hlayo"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_hwssg"]
 [ext_resource type="PackedScene" uid="uid://dadxqahji7jr1" path="res://Scenes/bullet.tscn" id="2_lwnhh"]
+[ext_resource type="Script" path="res://Scripts/playermovement.gd" id="4_yk78f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_806x8"]
 size = Vector2(8, 14.4)
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
-position = Vector2(-52, 94)
+[node name="Player" type="Node2D" groups=["player"]]
 scale = Vector2(5, 5)
 script = ExtResource("1_hwssg")
 Bullet = ExtResource("2_lwnhh")
+speed = null
 metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.2, -0.199999)
-shape = SubResource("RectangleShape2D_806x8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_hlayo")
@@ -27,15 +24,17 @@ position = Vector2(0.6, -0.199999)
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_speed = 8.0
 
-[node name="AttentionBar" type="ProgressBar" parent="."]
-offset_left = -126.6
-offset_top = -41.0
-offset_right = -51.6
-offset_bottom = -14.0
-
 [node name="HealthBar" type="ProgressBar" parent="."]
 offset_left = -126.6
 offset_top = -71.4
 offset_right = -51.6
 offset_bottom = -44.4
 max_value = 3.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("4_yk78f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0.2, -0.199999)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_806x8")

@@ -3,27 +3,43 @@ extends CharacterBody2D
 signal player_fired_bullet(bullet, position, direction)
 @export var Bullet: PackedScene
 @export var speed = 300
-var health : int = 3
+var health : int
+var max_health: int = 3
+var attention: float
+var max_attention: float = 100
+@export var attention_deplete: float = 1
+var is_attentive: bool
 
 @onready var end_of_gun = $Firepoint
 @onready var health_bar = $HealthBar
+@onready var attention_bar = $AttentionBar
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	is_attentive = true
+	health = max_health
+	attention = max_attention
+	update_attribute(health_bar, max_health)
+	update_attribute(attention_bar, max_attention)
 
 func get_input():
 	var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	velocity = input_direction * speed
 	
 func _physics_process(delta):
-	get_input()
-	move_and_slide()
-	update_health()
+	if is_attentive == true:
+		get_input()
+		move_and_slide()
+		
+	if attention <= 0:
+		attention_deficit()
+	update_attribute(health_bar, health)
+	decrement_attention(attention_deplete)
+	update_attribute(attention_bar, attention)
 
 func _unhandled_input(event: InputEvent):
-	if event.is_action_released("shoot"):
-		shoot()
+	if is_attentive:
+		if event.is_action_released("shoot"):
+			shoot()
 			
 func shoot():
 	var bullet_instance = Bullet.instantiate()
@@ -36,8 +52,14 @@ func shoot():
 	emit_signal("player_fired_bullet", bullet_instance, end_of_gun.global_position, direction_to_mouse)
 
 
-func update_health():
-	health_bar.value = health
+func update_attribute(attribute_bar, amount):
+	attribute_bar.value = amount
+	
+func decrement_attention(amount):
+	attention -= amount
+
+func attention_deficit():
+	is_attentive = false
 	
 func handle_hit():
 	health = health - 1
@@ -47,3 +69,5 @@ func handle_hit():
 func die():
 	#get_parent gets top most node, then queue_free removes node from tree
 	get_parent().queue_free()
+	
+	
