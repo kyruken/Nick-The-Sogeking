@@ -831,15 +831,16 @@ metadata/_edit_use_anchors_ = true
 script = ExtResource("3_hh2da")
 
 [node name="Tiktok" parent="." instance=ExtResource("4_bw031")]
-position = Vector2(1055, 208)
+position = Vector2(1048, 570)
 
 [node name="Player" parent="." instance=ExtResource("5_mw2pq")]
 position = Vector2(635, 438)
 
 [node name="enemy1" parent="." instance=ExtResource("6_07iaa")]
-position = Vector2(250, 136)
+position = Vector2(240, 516)
 
 [node name="TileMap" type="TileMap" parent="."]
+visible = false
 tile_set = SubResource("TileSet_xdqtd")
 format = 2
 layer_0/tile_data = PackedInt32Array(524300, 65536, 3, 589836, 65536, 3, 589837, 65536, 3, 458764, 65536, 3, 524301, 65536, 3, 458765, 65536, 3, 393229, 65536, 3, 393228, 65536, 3, 327692, 65536, 3, 327691, 65536, 3, 524296, 65536, 0, 524295, 65536, 0, 589831, 65536, 0, 589832, 65536, 0, 655368, 65536, 0, 655369, 65536, 0, 589833, 65536, 0, 524297, 65536, 0, 655367, 65536, 0, 327690, 262144, 3, 327689, 262144, 3, 327688, 262144, 3, 393224, 262144, 3, 458760, 262144, 3, 458761, 262144, 3, 393225, 262144, 3)

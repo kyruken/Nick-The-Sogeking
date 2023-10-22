@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dcqlvm0iqkgqi"]
+[gd_scene load_steps=6 format=3 uid="uid://dcqlvm0iqkgqi"]
 
 [ext_resource type="Texture2D" uid="uid://cd1ar5obp6y8o" path="res://Sprites/COFFE.png" id="1_hlayo"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_hwssg"]
 [ext_resource type="PackedScene" uid="uid://dadxqahji7jr1" path="res://Scenes/bullet.tscn" id="2_lwnhh"]
+[ext_resource type="AudioStream" uid="uid://bou5ehps4fs7v" path="res://Audio/SFX/tiktok_sound.mp3" id="4_7erfl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_806x8"]
 size = Vector2(8, 14.4)
@@ -39,3 +40,6 @@ offset_top = -71.4
 offset_right = -51.6
 offset_bottom = -44.4
 max_value = 3.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_7erfl")
