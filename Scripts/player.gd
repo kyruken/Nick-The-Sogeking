@@ -7,7 +7,7 @@ var health : int
 var max_health: int = 3
 var attention: float
 var max_attention: float = 100
-@export var attention_deplete: float = 1
+@export var attention_deplete: float = 0.1
 var is_attentive: bool
 
 @onready var end_of_gun = $Firepoint
@@ -40,7 +40,16 @@ func _unhandled_input(event: InputEvent):
 	if is_attentive:
 		if event.is_action_released("shoot"):
 			shoot()
-			
+	
+	if event.is_action_pressed("check_phone"):
+		check_phone()
+		
+func check_phone():
+	is_attentive = false
+	var cooldown = await get_tree().create_timer(2.0).timeout
+	attention = max_attention
+	is_attentive = true
+	
 func shoot():
 	var bullet_instance = Bullet.instantiate()
 	bullet_instance.global_position = end_of_gun.global_position
