@@ -46,7 +46,9 @@ func _unhandled_input(event: InputEvent):
 		
 func check_phone():
 	is_attentive = false
-	var cooldown = await get_tree().create_timer(2.0).timeout
+	var cooldown = await get_tree().create_timer(1.0).timeout
+	$AudioStreamPlayer.play()
+	var play_sound = await get_tree().create_timer(0.5).timeout
 	attention = max_attention
 	is_attentive = true
 	
