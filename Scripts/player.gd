@@ -15,6 +15,7 @@ var is_attentive: bool
 @onready var attention_bar = $AttentionBar
 
 func _ready():
+	$Sprite2D/AnimationPlayer.play("idle_animation") 
 	is_attentive = true
 	health = max_health
 	attention = max_attention
@@ -24,6 +25,19 @@ func _ready():
 func get_input():
 	var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	velocity = input_direction * speed
+	
+	if (velocity.x < 0 or velocity.y < 0):
+		$Sprite2D/AnimationPlayer.play("walk_animation")
+	elif (velocity.x > 0 or velocity.y > 0):
+		$Sprite2D/AnimationPlayer.play("walk_animation") 
+	else:
+		$Sprite2D/AnimationPlayer.play("idle_animation") 
+	
+	if (velocity.x < 0):
+		$Sprite2D.flip_h = 0
+	else:
+		$Sprite2D.flip_h = 1
+		
 	
 func _physics_process(delta):
 	if is_attentive == true:
@@ -45,14 +59,16 @@ func _unhandled_input(event: InputEvent):
 		check_phone()
 		
 func check_phone():
+	$Sprite2D/AnimationPlayer.play("phone_animation") 
 	is_attentive = false
-	var cooldown = await get_tree().create_timer(1.0).timeout
+	var cooldown = await get_tree().create_timer(0.5).timeout
 	$AudioStreamPlayer.play()
-	var play_sound = await get_tree().create_timer(0.5).timeout
+	var play_sound = await get_tree().create_timer(1).timeout
 	attention = max_attention
 	is_attentive = true
 	
 func shoot():
+	$Sprite2D/AnimationPlayer.play("attack_animation") 
 	var bullet_instance = Bullet.instantiate()
 	bullet_instance.global_position = end_of_gun.global_position
 	var target = get_global_mouse_position()
