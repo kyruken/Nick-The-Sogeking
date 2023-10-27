@@ -2,12 +2,11 @@ extends CharacterBody2D
 
 signal player_fired_bullet(bullet, position, direction)
 @export var Bullet: PackedScene
-@export var speed = 300
 var health : int
 var max_health: int = 3
 var attention: float
 var max_attention: float = 100
-@export var attention_deplete: float = 0.1
+@export var attention_deplete: float = 0.25
 var is_attentive: bool
 
 @onready var end_of_gun = $Firepoint
@@ -19,15 +18,10 @@ func _ready():
 	health = max_health
 	attention = max_attention
 	update_attribute(health_bar, max_health)
-	update_attribute(attention_bar, max_attention)
-
-func get_input():
-	var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	velocity = input_direction * speed
+	update_attribute(attention_bar, max_attention)	
 	
 func _physics_process(delta):
 	if is_attentive == true:
-		get_input()
 		move_and_slide()
 		
 	if attention <= 0:
@@ -45,14 +39,16 @@ func _unhandled_input(event: InputEvent):
 		check_phone()
 		
 func check_phone():
+	$Sprite2D/AnimationPlayer.play("phone_animation") 
 	is_attentive = false
-	var cooldown = await get_tree().create_timer(1.0).timeout
+	var cooldown = await get_tree().create_timer(0.5).timeout
 	$AudioStreamPlayer.play()
-	var play_sound = await get_tree().create_timer(0.5).timeout
+	var play_sound = await get_tree().create_timer(1).timeout
 	attention = max_attention
 	is_attentive = true
 	
 func shoot():
+	$Sprite2D/AnimationPlayer.play("attack_animation") 
 	var bullet_instance = Bullet.instantiate()
 	bullet_instance.global_position = end_of_gun.global_position
 	var target = get_global_mouse_position()
