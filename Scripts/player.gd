@@ -82,6 +82,5 @@ func die():
 	#get_parent gets top most node, then queue_free removes node from tree
 	get_parent().queue_free()
 
-
 func _on_timer_timeout():
 	can_shoot = true
