@@ -162,3 +162,8 @@ animator = NodePath("../../Sprite2D/AnimationPlayer")
 
 [node name="Phone" type="Node" parent="StateMachine"]
 script = ExtResource("8_r1y0n")
+
+[node name="BulletTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="BulletTimer" to="." method="_on_timer_timeout"]
