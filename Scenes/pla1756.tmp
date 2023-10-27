@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dcqlvm0iqkgqi"]
+[gd_scene load_steps=15 format=3 uid="uid://dcqlvm0iqkgqi"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_hwssg"]
 [ext_resource type="PackedScene" uid="uid://dadxqahji7jr1" path="res://Scenes/bullet.tscn" id="2_lwnhh"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://Scripts/StateMachine.gd" id="5_onhbj"]
 [ext_resource type="Script" path="res://Scripts/PlayerIdle.gd" id="6_pwx8q"]
 [ext_resource type="Script" path="res://Scripts/PlayerWalk.gd" id="7_if5fa"]
-[ext_resource type="Script" path="res://Scripts/PlayerPhone.gd" id="8_r1y0n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_806x8"]
 size = Vector2(8, 14.4)
@@ -151,14 +150,10 @@ stream = ExtResource("4_7erfl")
 script = ExtResource("5_onhbj")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator")]
+[node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("6_pwx8q")
-animator = NodePath("../../Sprite2D/AnimationPlayer")
 
-[node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("sprite", "animator")]
+[node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("7_if5fa")
-sprite = NodePath("../../Sprite2D")
-animator = NodePath("../../Sprite2D/AnimationPlayer")
-
-[node name="Phone" type="Node" parent="StateMachine"]
-script = ExtResource("8_r1y0n")
+player = NodePath("../..")
+speed = null

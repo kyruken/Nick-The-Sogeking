@@ -835,6 +835,7 @@ position = Vector2(1055, 208)
 
 [node name="Player" parent="." instance=ExtResource("2_y65w6")]
 position = Vector2(635, 438)
+attention_deplete = 0.5
 
 [node name="enemy1" parent="." instance=ExtResource("6_m8xix")]
 position = Vector2(250, 136)
