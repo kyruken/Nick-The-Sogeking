@@ -1,22 +1,38 @@
-[gd_scene load_steps=5 format=3 uid="uid://7fm7pihgpwvk"]
+[gd_scene load_steps=4 format=3 uid="uid://b22s4lneie1ja"]
 
 [ext_resource type="Texture2D" uid="uid://1vj7v3kc4raj" path="res://Sprites/customer.png" id="1_hupo8"]
-[ext_resource type="Script" path="res://Scripts/enemy1.gd" id="1_wjki6"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6hc0g"]
-size = Vector2(11, 16)
+[sub_resource type="GDScript" id="GDScript_t8bdq"]
+script/source = "extends CharacterBody2D
+
+var speed = 250
+var player_chase = false
+var player = null
+
+func _physics_process(delta):
+	if player_chase:
+		velocity = position.direction_to(player.global_position) * speed
+		move_and_slide()
+
+func _on_detection_area_body_entered(body):
+	player = body
+	player_chase = true
+	print(\"entered\")
+
+
+func _on_detection_area_body_exited(body):
+	player = null
+	player_chase = false
+	print(\"exited\")
+"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_onn6u"]
 radius = 62.9682
 
 [node name="enemy1" type="CharacterBody2D"]
 scale = Vector2(5, 5)
-script = ExtResource("1_wjki6")
+script = SubResource("GDScript_t8bdq")
 metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
-shape = SubResource("RectangleShape2D_6hc0g")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.941, 1)

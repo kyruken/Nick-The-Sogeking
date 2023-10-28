@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://g0gcdbyktj3u"]
+
+[ext_resource type="Texture2D" uid="uid://1vj7v3kc4raj" path="res://Sprites/customer.png" id="1_q8elu"]
+[ext_resource type="Script" path="res://Scenes/enemyCircle.gd" id="1_sjuoi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5vdsl"]
+size = Vector2(12.4, 15.2)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8sdkc"]
+radius = 62.9682
+
+[node name="EnemyCircle" type="CharacterBody2D"]
+position = Vector2(29, 36)
+scale = Vector2(5, 5)
+script = ExtResource("1_sjuoi")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.599998, 0.599999)
+shape = SubResource("RectangleShape2D_5vdsl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_q8elu")
+
+[node name="detection_area" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
+shape = SubResource("CircleShape2D_8sdkc")
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

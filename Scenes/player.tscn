@@ -9,6 +9,8 @@ size = Vector2(8, 14.4)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 scale = Vector2(5, 5)
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_hwssg")
 Bullet = ExtResource("2_lwnhh")
 metadata/_edit_group_ = true
