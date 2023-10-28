@@ -176,10 +176,9 @@ initial_state = NodePath("Idle")
 script = ExtResource("6_pwx8q")
 animator = NodePath("../../Sprite2D/AnimationPlayer")
 
-[node name="Dodge" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "character_body")]
+[node name="Dodge" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator")]
 script = ExtResource("7_nc0dg")
 animator = NodePath("../../Sprite2D/AnimationPlayer")
-character_body = NodePath("../..")
 
 [node name="DashTimer" type="Timer" parent="StateMachine/Dodge"]
 one_shot = true
