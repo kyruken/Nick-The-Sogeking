@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dcqlvm0iqkgqi"]
+[gd_scene load_steps=19 format=3 uid="uid://dcqlvm0iqkgqi"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_hwssg"]
 [ext_resource type="PackedScene" uid="uid://dadxqahji7jr1" path="res://Scenes/bullet.tscn" id="2_lwnhh"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/PlayerWalk.gd" id="7_if5fa"]
 [ext_resource type="Script" path="res://Scripts/PlayerDash.gd" id="7_nc0dg"]
 [ext_resource type="Script" path="res://Scripts/PlayerPhone.gd" id="8_r1y0n"]
+[ext_resource type="Script" path="res://Scripts/Dash.gd" id="9_ncmqr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_806x8"]
 size = Vector2(8, 14.4)
@@ -43,23 +44,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [8, 9, 10]
-}
-
-[sub_resource type="Animation" id="Animation_ym7fu"]
-resource_name = "dodge_animation"
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0749888, 0.191342, 0.305772, 0.401924, 0.483647, 0.579799, 0.665369),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [32, 33, 34, 35, 36, 37, 38, 39]
 }
 
 [sub_resource type="Animation" id="Animation_cnayi"]
@@ -111,6 +95,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_ym7fu"]
+resource_name = "dodge_animation"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0749888, 0.191342, 0.305772, 0.401924, 0.483647, 0.579799, 0.665369),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [32, 33, 34, 35, 36, 37, 38, 39]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7ugsl"]
@@ -176,13 +177,16 @@ initial_state = NodePath("Idle")
 script = ExtResource("6_pwx8q")
 animator = NodePath("../../Sprite2D/AnimationPlayer")
 
-[node name="Dodge" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "character_body")]
+[node name="Dodge" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator")]
 script = ExtResource("7_nc0dg")
 animator = NodePath("../../Sprite2D/AnimationPlayer")
-character_body = NodePath("../..")
 
-[node name="DashTimer" type="Timer" parent="StateMachine/Dodge"]
-one_shot = true
+[node name="Dash" type="Node2D" parent="StateMachine/Dodge"]
+position = Vector2(-52, 94)
+scale = Vector2(5, 5)
+script = ExtResource("9_ncmqr")
+
+[node name="DashTimer" type="Timer" parent="StateMachine/Dodge/Dash"]
 
 [node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("sprite", "animator")]
 script = ExtResource("7_if5fa")
