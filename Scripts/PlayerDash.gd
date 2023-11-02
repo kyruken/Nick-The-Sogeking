@@ -20,8 +20,10 @@ func Physics_Update(delta: float):
 	if is_dashing():
 		owner.velocity =  roll_vector * dashspeed
 		character_body.set_collision_layer_value(1, false)
+		character_body.set_collision_mask_value(1, false)
 	else:
 		character_body.set_collision_layer_value(1, true)
+		character_body.set_collision_mask_value(1, true)
 		Transitioned.emit(self, "walk")
 		
 func start_dash(dur):
