@@ -16,7 +16,6 @@ var is_attentive: bool
 var can_shoot = true
 
 func _ready():
-	
 	is_attentive = true
 	health = max_health
 	attention = max_attention
@@ -51,7 +50,6 @@ func check_phone():
 	is_attentive = true
 	
 func shoot():
-	
 	$Sprite2D/AnimationPlayer.play("attack_animation") 
 	var bullet_instance = Bullet.instantiate()
 	bullet_instance.global_position = end_of_gun.global_position
@@ -62,7 +60,7 @@ func shoot():
 	bullet_instance.set_direction(direction_to_mouse)
 	emit_signal("player_fired_bullet", bullet_instance, end_of_gun.global_position, direction_to_mouse)
 	can_shoot = false
-
+	
 
 func update_attribute(attribute_bar, amount):
 	attribute_bar.value = amount
@@ -84,3 +82,17 @@ func die():
 
 func _on_timer_timeout():
 	can_shoot = true
+
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name != "walk_animation":
+		if velocity.x > 0:
+			$Sprite2D/AnimationPlayer.play("walk_animation")
+			$Sprite2D.flip_h = 0
+		elif velocity.x < 0:
+			$Sprite2D/AnimationPlayer.play("walk_animation")
+			$Sprite2D.flip_h = 1
+		else:
+			$Sprite2D/AnimationPlayer.play("idle_animation")
+			
+			

@@ -31,7 +31,6 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_ksqb8"]
 resource_name = "attack_animation"
 length = 0.25
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -126,6 +125,8 @@ _data = {
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 position = Vector2(-52, 94)
 scale = Vector2(5, 5)
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_hwssg")
 Bullet = ExtResource("2_lwnhh")
 metadata/_edit_group_ = true
@@ -195,4 +196,5 @@ script = ExtResource("8_r1y0n")
 [node name="BulletTimer" type="Timer" parent="."]
 autostart = true
 
+[connection signal="animation_finished" from="Sprite2D/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="BulletTimer" to="." method="_on_timer_timeout"]
