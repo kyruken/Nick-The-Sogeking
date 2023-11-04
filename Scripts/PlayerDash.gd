@@ -4,7 +4,7 @@ class_name PlayerDash
 @export var animator : AnimationPlayer
 @export var character_body : CharacterBody2D
 const normalspeed = 300
-const dashspeed = 900
+const dashspeed = 700
 const dashlength = .8
 
 var roll_vector
@@ -19,11 +19,11 @@ func Enter():
 func Physics_Update(delta: float):
 	if is_dashing():
 		owner.velocity =  roll_vector * dashspeed
-		character_body.set_collision_layer_value(1, false)
-		character_body.set_collision_mask_value(1, false)
+		character_body.set_collision_layer_value(3, false)
+		character_body.set_collision_mask_value(3, false)
 	else:
-		character_body.set_collision_layer_value(1, true)
-		character_body.set_collision_mask_value(1, true)
+		character_body.set_collision_layer_value(3, true)
+		character_body.set_collision_mask_value(3, true)
 		Transitioned.emit(self, "walk")
 		
 func start_dash(dur):

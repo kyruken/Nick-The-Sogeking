@@ -547,7 +547,7 @@ position = Vector2(3740, 1785)
 
 [node name="Player" parent="." instance=ExtResource("2_y65w6")]
 position = Vector2(-3357, 1818)
-collision_layer = 7
+collision_layer = 3
 attention_deplete = 0.1
 
 [node name="BulletManager" type="Node2D" parent="." groups=["bullet_manager"]]
