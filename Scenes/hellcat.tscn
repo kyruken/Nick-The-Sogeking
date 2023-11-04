@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://ccqn73p1rc565"]
+
+[ext_resource type="Script" path="res://Scripts/hellcat.gd" id="1_rkqs8"]
+[ext_resource type="Texture2D" uid="uid://1vj7v3kc4raj" path="res://Sprites/customer.png" id="1_s80r2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rdf34"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_s80r2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ixy5r"]
+
+[node name="Hellcat" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_rkqs8")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_rdf34")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_ixy5r")

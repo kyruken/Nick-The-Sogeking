@@ -7,8 +7,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6hc0g"]
 size = Vector2(11, 16)
 
-[sub_resource type="Animation" id="Animation_k3hco"]
-resource_name = "kevin_idle_1"
+[sub_resource type="Animation" id="Animation_7yh5w"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -22,8 +22,8 @@ tracks/0/keys = {
 "values": [1]
 }
 
-[sub_resource type="Animation" id="Animation_7yh5w"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_k3hco"]
+resource_name = "kevin_idle_1"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -78,6 +78,7 @@ position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_6hc0g")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.941, 1)
