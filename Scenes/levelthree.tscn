@@ -569,7 +569,6 @@ script = ExtResource("7_knwjp")
 
 [node name="Boss" parent="." groups=["boss"] instance=ExtResource("7_vkwby")]
 position = Vector2(-241, -30)
-health = 2
 
 [connection signal="player_fired_bullet" from="Player" to="BulletManager" method="_on_player_player_fired_bullet"]
 

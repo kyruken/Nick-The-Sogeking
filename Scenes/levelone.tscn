@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_pmbes"]
 [ext_resource type="Texture2D" uid="uid://ckobfklah5rkq" path="res://Sprites/Grass.png" id="1_uejp1"]
-[ext_resource type="PackedScene" uid="uid://ccqn73p1rc565" path="res://Scenes/hellcat.tscn" id="2_162d8"]
 [ext_resource type="PackedScene" uid="uid://dcqlvm0iqkgqi" path="res://Scenes/player.tscn" id="2_y65w6"]
 [ext_resource type="Script" path="res://Scripts/BulletManager.gd" id="4_ciojm"]
 [ext_resource type="PackedScene" uid="uid://dqc66vafhwxjs" path="res://Scenes/tiktok.tscn" id="5_f5i5t"]
@@ -528,7 +527,6 @@ point_count = 5
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_pmbes")
-hellcat_scene = ExtResource("2_162d8")
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(3, 0)
@@ -569,23 +567,6 @@ rotation = -0.000387898
 
 [node name="HellcatTimer" type="Timer" parent="."]
 autostart = true
-[node name="enemy1" parent="." instance=ExtResource("6_m8xix")]
-position = Vector2(-2666, 489)
-
-[node name="enemy2" parent="." instance=ExtResource("6_m8xix")]
-position = Vector2(-1772, -181)
-
-[node name="enemy3" parent="." instance=ExtResource("6_m8xix")]
-position = Vector2(-3452, 489)
-
-[node name="enemy4" parent="." instance=ExtResource("6_m8xix")]
-position = Vector2(-2732, -176)
-
-[node name="enemy5" parent="." instance=ExtResource("6_m8xix")]
-position = Vector2(-3444, 1107)
-
-[node name="enemy23" parent="." instance=ExtResource("6_m8xix")]
-position = Vector2(-3713, -1145)
 
 [node name="Spawner" parent="." instance=ExtResource("9_m5und")]
 position = Vector2(-2470, 1805)
