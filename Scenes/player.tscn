@@ -126,6 +126,7 @@ _data = {
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 position = Vector2(-52, 94)
 scale = Vector2(5, 5)
+collision_layer = 3
 script = ExtResource("1_hwssg")
 Bullet = ExtResource("2_lwnhh")
 metadata/_edit_group_ = true
