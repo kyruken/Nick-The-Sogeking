@@ -5,7 +5,6 @@ var bullet_collider
 	
 func _on_player_player_fired_bullet(bullet, position, direction):
 	add_child(bullet)
-	bullet_collider = bullet.get_node("Area2D")
 	set_bullet_collision(bullet, 3, false)
 	set_bullet_collision(bullet, 9, true)
 	bullet.global_position = position
