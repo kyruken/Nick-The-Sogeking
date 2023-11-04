@@ -15,7 +15,7 @@ func _on_player_player_fired_bullet(bullet, position, direction):
 func _on_enemy_enemy_fired_bullet(bullet, position, direction):
 	add_child(bullet)
 	set_bullet_collision(bullet, 9, false)
-	set_bullet_collision(bullet, 1, true)
+	set_bullet_collision(bullet, 3, true)
 	bullet.global_position = position
 	bullet.set_direction(direction)
 
