@@ -19,6 +19,7 @@ func _ready():
 	self.connect("enemy_fired_bullet", bullet_manager._on_enemy_enemy_fired_bullet, 1)
 	
 func _physics_process(delta):
+	flip_sprite()
 	if player_chase:
 		velocity = position.direction_to(player.global_position) * speed
 		move_and_slide()
@@ -29,6 +30,7 @@ func _physics_process(delta):
 
 ### Collision functions ###
 func _on_detection_area_body_entered(body):
+	$Sprite2D/AnimationPlayer.play("kevin_walk_1") 
 	shoot_timer.start()
 	shoot_timer.set_paused(false)
 	player = body
@@ -69,6 +71,12 @@ func handle_hit():
 func die():
 	#get_parent gets top most node, then queue_free removes node from tree
 	queue_free()
+
+func flip_sprite():
+	if (self.velocity.x < 0):
+		$Sprite2D.flip_h = 0
+	elif (self.velocity.x > 0):
+		$Sprite2D.flip_h = 1
 ### Enemy private functions ###
 
 
