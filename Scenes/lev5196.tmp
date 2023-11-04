@@ -523,6 +523,7 @@ sources/3 = SubResource("TileSetAtlasSource_t4w3n")
 script = ExtResource("1_pmbes")
 
 [node name="TileMap" type="TileMap" parent="."]
+visible = false
 position = Vector2(3, 0)
 tile_set = SubResource("TileSet_xdqtd")
 format = 2
@@ -546,7 +547,6 @@ position = Vector2(3740, 1785)
 
 [node name="Player" parent="." instance=ExtResource("2_y65w6")]
 position = Vector2(-3357, 1818)
-collision_layer = 3
 attention_deplete = 0.1
 
 [node name="BulletManager" type="Node2D" parent="."]

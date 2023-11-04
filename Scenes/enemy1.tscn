@@ -1,20 +1,76 @@
-[gd_scene load_steps=5 format=3 uid="uid://7fm7pihgpwvk"]
+[gd_scene load_steps=10 format=3 uid="uid://7fm7pihgpwvk"]
 
-[ext_resource type="Texture2D" uid="uid://1vj7v3kc4raj" path="res://Sprites/customer.png" id="1_hupo8"]
 [ext_resource type="Script" path="res://Scripts/enemy1.gd" id="1_wjki6"]
+[ext_resource type="PackedScene" uid="uid://dadxqahji7jr1" path="res://Scenes/bullet.tscn" id="2_w8yju"]
+[ext_resource type="Texture2D" uid="uid://d1cdg8iqr3hn" path="res://Sprites/kevin_nguyen_1.png" id="3_colx4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6hc0g"]
 size = Vector2(11, 16)
+
+[sub_resource type="Animation" id="Animation_k3hco"]
+resource_name = "kevin_idle_1"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_7yh5w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_kppnu"]
+resource_name = "kevin_walk_1"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y6qsr"]
+_data = {
+"RESET": SubResource("Animation_7yh5w"),
+"kevin_idle_1": SubResource("Animation_k3hco"),
+"kevin_walk_1": SubResource("Animation_kppnu")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_onn6u"]
 radius = 62.9682
 
 [node name="enemy1" type="CharacterBody2D"]
 scale = Vector2(5, 5)
-collision_layer = 2
-collision_mask = 2
+collision_layer = 258
+collision_mask = 258
 motion_mode = 1
 script = ExtResource("1_wjki6")
+Bullet = ExtResource("2_w8yju")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -25,7 +81,14 @@ shape = SubResource("RectangleShape2D_6hc0g")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.941, 1)
-texture = ExtResource("1_hupo8")
+texture = ExtResource("3_colx4")
+hframes = 2
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_y6qsr")
+}
 
 [node name="detection_area" type="Area2D" parent="."]
 collision_layer = 2
@@ -40,7 +103,14 @@ wait_time = 0.1
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 2.0
 
+[node name="Firepoint" type="Node2D" parent="."]
+
+[node name="ShootTimer" type="Timer" parent="Firepoint"]
+wait_time = 3.0
+autostart = true
+
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
 [connection signal="timeout" from="NavTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="Firepoint/ShootTimer" to="." method="_on_shoot_timer_timeout"]
