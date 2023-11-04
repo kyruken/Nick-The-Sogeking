@@ -9,7 +9,7 @@ signal enemy_fired_bullet(bullet, position, direction)
 @onready var shoot_timer = $Firepoint/ShootTimer
 
 @onready var nav_agent = $NavigationAgent2D
-@export var player := Node2D
+@export var player := CharacterBody2D
 
 @onready var navTimer = $NavTimer
 @onready var attackTimer = $AttackTimer
@@ -27,11 +27,13 @@ enum {
 }
 
 func _ready():
+	var player_node = get_tree().get_first_node_in_group("player")
+	player = player_node
 	rng.randomize()
 	randomnum = rng.randf()
 	
-	var bullet_manager = get_parent().get_node("BulletManager")
-	self.connect("enemy_fired_bullet", bullet_manager._on_enemy_enemy_fired_bullet, 1)
+	var bullet_manager = get_tree().get_first_node_in_group("bullet_manager")
+	self.connect("enemy_fired_bullet", bullet_manager._on_enemy_fired_bullet, 1)
 
 func _physics_process(delta):
 	move(delta)
