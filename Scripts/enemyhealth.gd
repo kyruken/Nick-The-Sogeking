@@ -1,7 +1,7 @@
 extends CharacterBody2D
 #Health logic handled here
 
-var health : int = 3
+var health : int = 1
 
 func handle_hit():
 	health = health - 1

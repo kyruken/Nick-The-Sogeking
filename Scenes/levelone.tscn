@@ -1,13 +1,12 @@
-[gd_scene load_steps=25 format=3 uid="uid://b2bw5jdsjuvj5"]
+[gd_scene load_steps=24 format=3 uid="uid://b2bw5jdsjuvj5"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_pmbes"]
 [ext_resource type="Texture2D" uid="uid://ckobfklah5rkq" path="res://Sprites/Grass.png" id="1_uejp1"]
 [ext_resource type="PackedScene" uid="uid://dcqlvm0iqkgqi" path="res://Scenes/player.tscn" id="2_y65w6"]
 [ext_resource type="Script" path="res://Scripts/BulletManager.gd" id="4_ciojm"]
-[ext_resource type="PackedScene" uid="uid://dqc66vafhwxjs" path="res://Scenes/tiktok.tscn" id="5_f5i5t"]
 [ext_resource type="Texture2D" uid="uid://wwcbx22m6t31" path="res://Sprites/target_tilemap2.png" id="7_gchqj"]
 [ext_resource type="PackedScene" uid="uid://dmmsf1mya4tf4" path="res://Scenes/finishline.tscn" id="8_5daku"]
-[ext_resource type="PackedScene" uid="uid://dunf6rtiawyd" path="res://Scenes/spawner.tscn" id="9_m5und"]
+[ext_resource type="PackedScene" uid="uid://ccqn73p1rc565" path="res://Scenes/hellcat.tscn" id="9_2hedu"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_bjr11"]
 vertices = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
@@ -527,6 +526,7 @@ point_count = 5
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_pmbes")
+hellcat_scene = ExtResource("9_2hedu")
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(3, 0)
@@ -543,9 +543,6 @@ offset_bottom = 720.0
 texture = ExtResource("1_uejp1")
 stretch_mode = 1
 metadata/_edit_use_anchors_ = true
-
-[node name="Tiktok" parent="." instance=ExtResource("5_f5i5t")]
-position = Vector2(1055, 208)
 
 [node name="Node2D" parent="." instance=ExtResource("8_5daku")]
 position = Vector2(3740, 1785)
@@ -567,9 +564,6 @@ rotation = -0.000387898
 
 [node name="HellcatTimer" type="Timer" parent="."]
 autostart = true
-
-[node name="Spawner" parent="." instance=ExtResource("9_m5und")]
-position = Vector2(-2470, 1805)
 
 [connection signal="player_fired_bullet" from="Player" to="BulletManager" method="_on_player_player_fired_bullet"]
 [connection signal="timeout" from="HellcatTimer" to="." method="_on_hellcat_timer_timeout"]

@@ -11,6 +11,9 @@ func _process(delta):
 	pass
 
 func _on_area_2d_body_entered(body):
-	print('hit player')
 	if body.has_method("handle_hit"):
 		body.handle_hit()
+
+
+func _on_timer_timeout():
+	queue_free()

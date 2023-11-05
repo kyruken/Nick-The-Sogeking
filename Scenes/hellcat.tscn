@@ -1,32 +1,42 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccqn73p1rc565"]
+[gd_scene load_steps=6 format=3 uid="uid://ccqn73p1rc565"]
 
-[ext_resource type="Script" path="res://Scripts/hellcat.gd" id="1_rkqs8"]
-[ext_resource type="Texture2D" uid="uid://1vj7v3kc4raj" path="res://Sprites/customer.png" id="1_s80r2"]
+[ext_resource type="Script" path="res://Scripts/Tiktok.gd" id="1_n6ttn"]
+[ext_resource type="Texture2D" uid="uid://4tj6vwsqot46" path="res://Sprites/car.png" id="2_2mdvx"]
+[ext_resource type="Script" path="res://Scripts/enemyhealth.gd" id="2_cmtcf"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_rdf34"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_s80r2")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wg7fn"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ixy5r"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7x42d"]
 
 [node name="Hellcat" type="RigidBody2D"]
-collision_layer = 0
-collision_mask = 0
+collision_layer = 4
+collision_mask = 4
 gravity_scale = 0.0
-script = ExtResource("1_rkqs8")
+script = ExtResource("1_n6ttn")
 metadata/_edit_group_ = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(4, 4)
-sprite_frames = SubResource("SpriteFrames_rdf34")
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 5
+collision_mask = 5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_wg7fn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
-shape = SubResource("RectangleShape2D_ixy5r")
+texture = ExtResource("2_2mdvx")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 256
+collision_mask = 256
+script = ExtResource("2_cmtcf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("RectangleShape2D_7x42d")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
